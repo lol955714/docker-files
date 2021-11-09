@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+    mysql:
+        image: mysql:5.7
+        container_name: mysql
+        environment:
+            MYSQL_DATABASE: lol
+            MYSQL_USER: lol
+            MYSQL_PASSWORD: noquiero
+            MYSQL_ROOT_PASSWORD: admin
+        ports:
+            - 33069:3306
+        volumes:
+            - ./mysql2:/var/lib/mysql

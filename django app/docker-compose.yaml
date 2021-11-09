@@ -1,0 +1,47 @@
+version: "3"
+services: 
+    db_wichos:
+        image: postgres:11.11-alpine
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+        environment: 
+            POSTGRES_PASSWORD: something
+            POSTGRES_USER: lol
+            POSTGRES_DB: wichos
+    django_app:
+        build: .
+        volumes: 
+            - static:/code/static
+            - media:/code/media
+            - .:/code
+        depends_on: 
+            - db_wichos
+    nginx:
+        image: nginx:1.20.0-alpine
+        ports: 
+            - 8000:80
+        volumes: 
+            - ./config/nginx/conf.d:/etc/nginx/conf.d
+            - static:/code/static
+            - media:/code/media
+        depends_on: 
+            - django_app
+    pgadmin:
+        container_name: pgadmin_container
+        image: dpage/pgadmin4
+        environment:
+          PGADMIN_DEFAULT_EMAIL: bonillaandres95@gmail.com
+          PGADMIN_DEFAULT_PASSWORD: something
+          PGADMIN_CONFIG_SERVER_MODE: 'False'
+        volumes:
+           - pgadmin:/root/.pgadmin
+        depends_on: 
+           - db_wichos
+        ports:
+          - 5050:80
+volumes: 
+    .:
+    postgres_data:
+    media:
+    static:
+    pgadmin:

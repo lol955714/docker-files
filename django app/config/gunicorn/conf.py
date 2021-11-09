@@ -1,0 +1,5 @@
+name = 'wichos'
+loglevel = 'info'
+errorlol = '-'
+accesslol = '-'
+workers = '4'
