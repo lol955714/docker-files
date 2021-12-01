@@ -39,6 +39,7 @@ services:
         container_name: phpMyAdmin
         environment:
             MYSQL_ROOT_PASSWORD: admin
+            PMA_HOST: mysql
         depends_on:
             - mysql
         ports:
