@@ -1,0 +1,4 @@
+cd /
+composer create-project laravel/laravel /app
+chown -R $USER:www-data /app/storage
+chmod -R 775 /app/storage
