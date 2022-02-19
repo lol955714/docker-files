@@ -1,0 +1,9 @@
+FROM node:16
+WORKDIR /app
+EXPOSE 3000
+# RUN npm install
+RUN npm install -g nodemon 
+CMD ["npm","run","nodemon"]
+#CMD ["npm","run","start"]
+
+

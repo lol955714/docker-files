@@ -1,0 +1,7 @@
+FROM node:16
+WORKDIR /app
+# RUN npm install vue@next
+# RUN npm install -g @vue/cli
+# RUN npm install
+EXPOSE 5000
+CMD ["npm", "run", "serve","--","--port","8080"]
