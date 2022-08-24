@@ -1,0 +1,8 @@
+FROM node:16
+WORKDIR /app
+RUN npm install
+RUN npm install -g nodemon 
+CMD ["npm","start"] #this should to work fine
+#CMD ["npm","run","start"] #i dont remember why this is comented
+
+

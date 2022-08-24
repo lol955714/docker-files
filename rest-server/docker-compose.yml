@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+    mongo:
+      container_name: mongo
+      image: mongo
+      ports:
+        - 27017:27017
+      volumes:
+        - mongoData:/data/db
+    mongo-express:
+      container_name: mongo_express
+      image: mongo-express
+      depends_on:
+        - mongo
+      ports:
+        - 8082:8081
+      environment:
+        ME_CONFIG_MONGODB_URL: mongodb://lol:example@mongo:27017/
+        ME_CONFIG_MONGODB_SERVER: mongo
+        ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
+    express:
+      container_name: express
+      ports:
+        - 3000:3001
+      build:
+        context: .
+        dockerfile: Dockerfile_node #we are going to create an image for developing node, that image will use nodemon and when u install another dependency should to rebuild de base image
+      depends_on:
+        - mongo
+      volumes:
+        - ./restserver:/app
+        - /app/node_modules
+    
+volumes:
+    .:
+    mongoData:
